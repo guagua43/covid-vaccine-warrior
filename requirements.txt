@@ -25,7 +25,6 @@ requests
 uszipcode
 Flask
 mpu
-operator
 pytest
-random
+
 

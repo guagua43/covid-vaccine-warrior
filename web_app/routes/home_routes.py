@@ -1,7 +1,7 @@
 # web_app/routes/home_routes.py
 
-from flask import Blueprint, request, render_template
-from app.vaccine_warrior import vaccine_stop
+from flask import Blueprint, request, render_template, jsonify
+from app.vaccine_warrior import vaccine_stop, facility_list
 
 
 home_routes = Blueprint("home_routes", __name__)
@@ -25,3 +25,11 @@ def search_result():
     results = vaccine_stop(zipcode=zip_code)
     print(results)
     return render_template("search_result.html", zip_code=zip_code, results=results)
+ 
+
+@home_routes.route("/facility.json")
+def facility_api():
+    if facility_list:
+        return jsonify(facility_list)
+    else:
+        return jsonify({"message":"Input Error"}), 404
